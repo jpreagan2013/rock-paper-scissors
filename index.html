@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <body>
+       <script>
+	   
+		function computerPlay() {
+			var options = ["rock", "paper", "scissors"];
+			var random = Math.floor(Math.random() * 3);
+			return options[random];
+		}
+		
+		function playRound(playerSelection, computerSelection) {
+			var status = null;
+			if (playerSelection == computerSelection) {
+				status = "tie"
+			}
+			switch (playerSelection) {
+				case 'rock':
+					switch (computerSelection) {
+						case 'paper':
+							status = 'lose'
+							break;
+						case 'scissors':
+							status = 'win'
+							break;
+					}
+					break;
+				case 'paper':
+					switch (computerSelection) {
+							case "rock":
+								status = "win"
+								break;
+							case "scissors":
+								status = "lose"
+								break
+					}
+					break;
+				case 'scissors':
+					switch (computerSelection) {
+							case 'rock':
+								status = 'lose'
+								break;
+							case 'paper':
+								status = 'win'
+								break;
+					}
+					break;
+			}
+		
+			if (status == 'win') {
+				return `You win! ${playerSelection} beats ${computerSelection}`
+			} else if (status == 'lose') {
+			
+				return `You lose! ${computerSelection} beats ${playerSelection}`
+			
+			} else if (status == 'tie') {
+			
+				return "You Tie!"
+			
+			} else {
+			
+				return "That's not an option!"
+			}
+		}
+		
+		function game() {
+			let playerSelection = prompt("Rock, paper, or scissors?");
+			const computerSelection = computerPlay();
+			console.log(playRound(playerSelection, computerSelection));
+		}
+		
+		game()
+		
+	   </script>
+    </body>
+
+</html>
