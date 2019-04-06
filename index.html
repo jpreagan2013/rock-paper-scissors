@@ -2,7 +2,9 @@
 <html>
     <body>
        <script>
-	   //test
+	   let compScore = 0;
+	   let personScore = 0;
+	   let badRound = false;
 		function computerPlay() {
 			var options = ["rock", "paper", "scissors"];
 			var random = Math.floor(Math.random() * 3);
@@ -48,9 +50,10 @@
 			}
 		
 			if (status == 'win') {
+				personScore++;
 				return `You win! ${playerSelection} beats ${computerSelection}`
 			} else if (status == 'lose') {
-			
+				compScore++;
 				return `You lose! ${computerSelection} beats ${playerSelection}`
 			
 			} else if (status == 'tie') {
@@ -58,15 +61,31 @@
 				return "You Tie!"
 			
 			} else {
-			
+				badRound = true;
 				return "That's not an option!"
 			}
 		}
 		
 		function game() {
-			let playerSelection = prompt("Rock, paper, or scissors?");
+			let round = 0;
+			while (round < 5) {
+				badRound = false;
+				let playerSelection = prompt("Rock, paper, or scissors?");
 			const computerSelection = computerPlay();
 			console.log(playRound(playerSelection, computerSelection));
+			if (!badRound) {
+				round++;
+				console.log(`Score - Computer: ${compScore}, Human: ${personScore}`);
+			}
+			}
+			
+			if (compScore > personScore) {
+				console.log("You Lose");
+			} else if (compScore < personScore) {
+				console.log("You Win");
+			} else {
+				console.log("Cat Game");
+			}
 		}
 		
 		game()
