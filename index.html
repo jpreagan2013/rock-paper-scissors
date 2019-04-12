@@ -76,15 +76,17 @@
 
 		// buttons is a node list. It looks and acts much like an array.
 		const buttons = document.querySelectorAll('button');
+
+		//these are just objects, not lists
 		const scorekeeper = document.querySelector('p');
 		const winMessage = document.createElement('p');
 		const playAgain = document.createElement('button');
 		let count = 0;
 		
-		// we use the .forEach method to iterate through each button
+		//use the .forEach method to iterate through each button
 		buttons.forEach((button) => {
 
-		// and for each one we add a 'click' listener
+		//add a 'click' listener to each button, with the following function
 		button.addEventListener('click', (e) => {
 			if (count < 5) {
 			count++;
