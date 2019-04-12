@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
     <body>
+			<button id="rock">Rock</button>
+			<button id="paper">Paper</button>
+			<button id="scissors">Scissors</button>
+			<p id="scorecard"> Score: Human - 0 Computer - 0 </p>
+
        <script>
 	   let compScore = 0;
 	   let personScore = 0;
@@ -64,33 +69,48 @@
 				badRound = true;
 				return "That's not an option!"
 			}
+
+
 		}
 		
-		function game() {
-			let round = 0;
-			while (round < 5) {
-				badRound = false;
-				let playerSelection = prompt("Rock, paper, or scissors?");
-			const computerSelection = computerPlay();
-			console.log(playRound(playerSelection, computerSelection));
-			if (!badRound) {
-				round++;
-				console.log(`Score - Computer: ${compScore}, Human: ${personScore}`);
-			}
-			}
-			
-			if (compScore > personScore) {
-				console.log("You Lose");
-			} else if (compScore < personScore) {
-				console.log("You Win");
-			} else {
-				console.log("Cat Game");
-			}
-		}
+
+		// buttons is a node list. It looks and acts much like an array.
+		const buttons = document.querySelectorAll('button');
+		const scorekeeper = document.querySelector('p');
+		const winMessage = document.createElement('p');
+		const playAgain = document.createElement('button');
+		let count = 0;
 		
-		game()
+		// we use the .forEach method to iterate through each button
+		buttons.forEach((button) => {
+
+		// and for each one we add a 'click' listener
+		button.addEventListener('click', (e) => {
+			if (count < 5) {
+			count++;
+			alert(playRound(button.id, computerPlay()));
+			scorekeeper.textContent = ` Score: Human - ${personScore} Computer - ${compScore} `;
+			}
+			if (count == 5)  {
+				scorekeeper.textContent = ` Score: Human - ${personScore} Computer - ${compScore} `;
+				if (personScore > compScore) {
+					winMessage.textContent = "Human wins!"
+				} else if (personScore < compScore) {
+					winMessage.textContent = 'Computer wins!'
+				} else {
+					winMessage.textContent = "Tie Game!"
+				}
+				document.body.appendChild(winMessage);
+				playAgain.textContent = 'Play Again?'
+				playAgain.addEventListener('click', (e) => {location.reload();});
+				document.body.appendChild(playAgain);
+			}
+		});
+		});
+
+	
 		
-	   </script>
+	</script>
     </body>
 
 </html>
